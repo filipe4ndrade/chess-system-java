@@ -55,10 +55,16 @@ public class UI {
 		printPecasCapturadas(capturada);
 		System.out.println();
 		System.out.println("Turno: " + partidaDeXadrez.getTurno());
-		String corPeca = (partidaDeXadrez.getJogadorAtual() == Cores.WHITE) ? ANSI_WHITE : ANSI_YELLOW;	
-		System.out.println("Aguardando o Jogador: " +corPeca+ partidaDeXadrez.getJogadorAtual()+ ANSI_RESET);
-		if(partidaDeXadrez.getCheck()) {
-			System.out.println(ANSI_RED + "XEQUE!" + ANSI_RESET );
+		String corPeca = (partidaDeXadrez.getJogadorAtual() == Cores.WHITE) ? ANSI_WHITE : ANSI_YELLOW;
+		if (!partidaDeXadrez.getCheckMate()) {
+			System.out.println("Aguardando o Jogador: " + corPeca + partidaDeXadrez.getJogadorAtual() + ANSI_RESET);
+			if (partidaDeXadrez.getCheck()) {
+				System.out.println(ANSI_RED + "XEQUE!" + ANSI_RESET);
+			}
+		}
+		else {
+			System.out.println(ANSI_RED +"===Xeque-Mate==="+ ANSI_RESET);
+			System.out.println(ANSI_RED +"Vencedor: "+ ANSI_RESET + corPeca + partidaDeXadrez.getJogadorAtual() + ANSI_RESET);
 		}
 	}
 
