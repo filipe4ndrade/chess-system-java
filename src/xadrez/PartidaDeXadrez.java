@@ -1,6 +1,5 @@
 package xadrez;
 
-import tabuleiro.Posicao;
 import tabuleiro.TabuleiroDoJogo;
 import xadrez.pecas.Rei;
 import xadrez.pecas.Torre;
@@ -23,15 +22,26 @@ public class PartidaDeXadrez {
 		}
 		return mat;
 	}
-	
+
 	private void novoLugarPeca(char coluna, int linha, PecaDeXadrez peca) {
-		tabuleiro.lugarDaPeca(peca, new PosicaoNoXadrez(coluna,linha).toPosicao());
-		
+		tabuleiro.lugarDaPeca(peca, new PosicaoNoXadrez(coluna, linha).toPosicao());
+
 	}
-	
+
 	private void iniciarPartida() {
-		novoLugarPeca('b',6,new Torre(tabuleiro, Cores.WHITE));
-		novoLugarPeca('e',8,new Rei(tabuleiro , Cores.BLACK));
-		novoLugarPeca('e',1,new Rei(tabuleiro , Cores.WHITE));
+		
+		novoLugarPeca('c', 1, new Torre(tabuleiro, Cores.WHITE));
+		novoLugarPeca('c', 2, new Torre(tabuleiro, Cores.WHITE));
+		novoLugarPeca('d', 2, new Torre(tabuleiro, Cores.WHITE));
+		novoLugarPeca('e', 2, new Torre(tabuleiro, Cores.WHITE));
+		novoLugarPeca('e', 1, new Torre(tabuleiro, Cores.WHITE));
+		novoLugarPeca('d', 1, new Rei(tabuleiro, Cores.WHITE));
+
+		novoLugarPeca('c', 7, new Torre(tabuleiro, Cores.BLACK));
+		novoLugarPeca('c', 8, new Torre(tabuleiro, Cores.BLACK));
+		novoLugarPeca('d', 7, new Torre(tabuleiro, Cores.BLACK));
+		novoLugarPeca('e', 7, new Torre(tabuleiro, Cores.BLACK));
+		novoLugarPeca('e', 8, new Torre(tabuleiro, Cores.BLACK));
+		novoLugarPeca('d', 8, new Rei(tabuleiro, Cores.BLACK));
 	}
 }
