@@ -59,11 +59,11 @@ public class TabuleiroDoJogo {
 		return aux;
 	}
 
-	private boolean posicaoExistente(int linha, int coluna) {
+	public boolean posicaoExistente(int linha, int coluna) {
 		return linha >= 0 && linha < linhas && coluna >= 0 && coluna < colunas;
 	}
 
-	private boolean posicaoExistente(Posicao posicao) {
+	public boolean posicaoExistente(Posicao posicao) {
 		return posicaoExistente(posicao.getLinha(), posicao.getColuna());
 	}
 
