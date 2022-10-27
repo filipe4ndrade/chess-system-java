@@ -45,6 +45,19 @@ public class TabuleiroDoJogo {
 		pecas[posicao.getLinha()][posicao.getColuna()] = peca;
 		peca.posicao = posicao;
 	}
+	
+	public Peca removerPeca(Posicao posicao) {
+		if(!posicaoExistente(posicao)) {
+			throw new TabuleiroException("Posicao não existe no tabuleiro");
+		}
+		if(peca(posicao)==null) {
+			return null;
+		}
+		Peca aux = peca(posicao);
+		aux.posicao = null;
+		pecas[posicao.getLinha()][posicao.getColuna()] = null;
+		return aux;
+	}
 
 	private boolean posicaoExistente(int linha, int coluna) {
 		return linha >= 0 && linha < linhas && coluna >= 0 && coluna < colunas;
@@ -54,7 +67,7 @@ public class TabuleiroDoJogo {
 		return posicaoExistente(posicao.getLinha(), posicao.getColuna());
 	}
 
-	private boolean existePeca(Posicao posicao) {
+	public boolean existePeca(Posicao posicao) {
 		if (!posicaoExistente(posicao)) {
 			throw new TabuleiroException("Posicao nao existe no tabuleiro");
 		}
