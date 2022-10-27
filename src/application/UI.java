@@ -55,7 +55,11 @@ public class UI {
 		printPecasCapturadas(capturada);
 		System.out.println();
 		System.out.println("Turno: " + partidaDeXadrez.getTurno());
-		System.out.println("Aguardando o Jogador: " + partidaDeXadrez.getJogadorAtual());
+		String corPeca = (partidaDeXadrez.getJogadorAtual() == Cores.WHITE) ? ANSI_WHITE : ANSI_YELLOW;	
+		System.out.println("Aguardando o Jogador: " +corPeca+ partidaDeXadrez.getJogadorAtual()+ ANSI_RESET);
+		if(partidaDeXadrez.getCheck()) {
+			System.out.println(ANSI_RED + "XEQUE!" + ANSI_RESET );
+		}
 	}
 
 	public static void printTabuleiro(PecaDeXadrez[][] pecas) {
