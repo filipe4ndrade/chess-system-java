@@ -24,9 +24,14 @@ public class PartidaDeXadrez {
 		return mat;
 	}
 	
+	private void novoLugarPeca(char coluna, int linha, PecaDeXadrez peca) {
+		tabuleiro.lugarDaPeca(peca, new PosicaoNoXadrez(coluna,linha).toPosicao());
+		
+	}
+	
 	private void iniciarPartida() {
-		tabuleiro.lugarDaPeca(new Torre(tabuleiro, Cores.WHITE), new Posicao(7,0));
-		tabuleiro.lugarDaPeca(new Rei(tabuleiro , Cores.WHITE),new Posicao(7,0));
-		tabuleiro.lugarDaPeca(new Rei(tabuleiro , Cores.WHITE),new Posicao(7,4));
+		novoLugarPeca('b',6,new Torre(tabuleiro, Cores.WHITE));
+		novoLugarPeca('e',8,new Rei(tabuleiro , Cores.BLACK));
+		novoLugarPeca('e',1,new Rei(tabuleiro , Cores.WHITE));
 	}
 }

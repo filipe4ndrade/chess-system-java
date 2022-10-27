@@ -2,6 +2,6 @@ package xadrez;
 
 public enum Cores {
 
-	BACK,
+	BLACK,
 	WHITE;
 }
