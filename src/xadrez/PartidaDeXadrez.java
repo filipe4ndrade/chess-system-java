@@ -75,17 +75,17 @@ public class PartidaDeXadrez {
 
 		check = (testeCheck(oponente(jogadorAtual))) ? true : false;
 
-		if(testeCheckMate(oponente(jogadorAtual))) {
+		if (testeCheckMate(oponente(jogadorAtual))) {
 			checkMate = true;
-		}
-		else{
+		} else {
 			proximoTurno();
 		}
 		return (PecaDeXadrez) pecaCapturada;
 	}
 
 	private Peca fazerMovimento(Posicao origem, Posicao destino) {
-		Peca p = tabuleiro.removerPeca(origem);
+		PecaDeXadrez p = (PecaDeXadrez) tabuleiro.removerPeca(origem);
+		p.adicionarContagemMovimento();
 		Peca pecaCapturada = tabuleiro.removerPeca(destino);
 		tabuleiro.lugarDaPeca(p, destino);
 
@@ -98,7 +98,8 @@ public class PartidaDeXadrez {
 	}
 
 	private void desfazerMovimento(Posicao origem, Posicao destino, Peca pecaCapturada) {
-		Peca p = tabuleiro.removerPeca(destino);
+		PecaDeXadrez p = (PecaDeXadrez) tabuleiro.removerPeca(destino);
+		p.diminuirContagemMovimento();
 		tabuleiro.lugarDaPeca(p, origem);
 
 		if (pecaCapturada != null) {
