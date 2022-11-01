@@ -3,12 +3,16 @@ package xadrez.pecas;
 import tabuleiro.Posicao;
 import tabuleiro.TabuleiroDoJogo;
 import xadrez.Cores;
+import xadrez.PartidaDeXadrez;
 import xadrez.PecaDeXadrez;
 
 public class Rei extends PecaDeXadrez {
 
-	public Rei(TabuleiroDoJogo tabuleiro, Cores cor) {
+	private PartidaDeXadrez partidaDeXadrez;
+	
+	public Rei(TabuleiroDoJogo tabuleiro, Cores cor,PartidaDeXadrez partidaDeXadrez ) {
 		super(tabuleiro, cor);
+		this.partidaDeXadrez = partidaDeXadrez;
 	}
 
 	@Override
@@ -19,6 +23,11 @@ public class Rei extends PecaDeXadrez {
 	private boolean podeMover(Posicao posicao) {
 		PecaDeXadrez p = (PecaDeXadrez) getTabuleiro().peca(posicao);
 		return p == null || p.getCor() != getCor();
+	}
+	
+	private boolean testeTorre(Posicao posicao) {
+		PecaDeXadrez p = (PecaDeXadrez) getTabuleiro().peca(posicao);
+		return p != null && p instanceof Torre && p.getCor() == getCor() && p.getContagemMovimento() == 0;
 	}
 
 	@Override
@@ -67,6 +76,13 @@ public class Rei extends PecaDeXadrez {
 		if (getTabuleiro().posicaoExistente(p) && podeMover(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
+		
+		//#Movimento Especial Castling, Roque
+		if(getContagemMovimento() == 0 && !partidaDeXadrez.getCheck()) {
+		     // Roque Pequeno, rei
+			Posicao posT1 = new Posicao()
+		}
+		
 		return mat;
 	}
 
