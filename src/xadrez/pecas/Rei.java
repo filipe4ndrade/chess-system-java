@@ -80,7 +80,10 @@ public class Rei extends PecaDeXadrez {
 		//#Movimento Especial Castling, Roque
 		if(getContagemMovimento() == 0 && !partidaDeXadrez.getCheck()) {
 		     // Roque Pequeno, rei
-			Posicao posT1 = new Posicao()
+			Posicao posT1 = new Posicao(posicao.getLinha(), posicao.getColuna() + 3);
+			if(testeTorre(posT1)) {
+				Posicao p1 = new Posicao(posicao.getLinha(),posicao.getColuna()+1)
+			}
 		}
 		
 		return mat;
