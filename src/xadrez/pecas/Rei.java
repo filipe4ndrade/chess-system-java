@@ -9,8 +9,8 @@ import xadrez.PecaDeXadrez;
 public class Rei extends PecaDeXadrez {
 
 	private PartidaDeXadrez partidaDeXadrez;
-	
-	public Rei(TabuleiroDoJogo tabuleiro, Cores cor,PartidaDeXadrez partidaDeXadrez ) {
+
+	public Rei(TabuleiroDoJogo tabuleiro, Cores cor, PartidaDeXadrez partidaDeXadrez) {
 		super(tabuleiro, cor);
 		this.partidaDeXadrez = partidaDeXadrez;
 	}
@@ -24,7 +24,7 @@ public class Rei extends PecaDeXadrez {
 		PecaDeXadrez p = (PecaDeXadrez) getTabuleiro().peca(posicao);
 		return p == null || p.getCor() != getCor();
 	}
-	
+
 	private boolean testeTorre(Posicao posicao) {
 		PecaDeXadrez p = (PecaDeXadrez) getTabuleiro().peca(posicao);
 		return p != null && p instanceof Torre && p.getCor() == getCor() && p.getContagemMovimento() == 0;
@@ -62,7 +62,7 @@ public class Rei extends PecaDeXadrez {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
 		// Nordeste
-		p.setValores(posicao.getLinha()-1, posicao.getColuna() + 1);
+		p.setValores(posicao.getLinha() - 1, posicao.getColuna() + 1);
 		if (getTabuleiro().posicaoExistente(p) && podeMover(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
@@ -76,16 +76,30 @@ public class Rei extends PecaDeXadrez {
 		if (getTabuleiro().posicaoExistente(p) && podeMover(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
-		
-		//#Movimento Especial Castling, Roque
-		if(getContagemMovimento() == 0 && !partidaDeXadrez.getCheck()) {
-		     // Roque Pequeno, rei
+
+		// #Movimento Especial Castling, Roque
+		if (getContagemMovimento() == 0 && !partidaDeXadrez.getCheck()) {
+			// Roque Pequeno, rei
 			Posicao posT1 = new Posicao(posicao.getLinha(), posicao.getColuna() + 3);
-			if(testeTorre(posT1)) {
-				Posicao p1 = new Posicao(posicao.getLinha(),posicao.getColuna()+1)
+			if (testeTorre(posT1)) {
+				Posicao p1 = new Posicao(posicao.getLinha(), posicao.getColuna() + 1);
+				Posicao p2 = new Posicao(posicao.getLinha(), posicao.getColuna() + 2);
+				if (getTabuleiro().peca(p1) == null && getTabuleiro().peca(p2) == null) {
+					mat[posicao.getLinha()][posicao.getColuna() + 2] = true;
+				}
+			}
+			// Roque Grande, rainha
+			Posicao posT2 = new Posicao(posicao.getLinha(), posicao.getColuna() -4);
+			if (testeTorre(posT1)) {
+				Posicao p1 = new Posicao(posicao.getLinha(), posicao.getColuna() - 1);
+				Posicao p2 = new Posicao(posicao.getLinha(), posicao.getColuna() - 2);
+				Posicao p3 = new Posicao(posicao.getLinha(), posicao.getColuna() - 3);
+				if (getTabuleiro().peca(p1) == null && getTabuleiro().peca(p2) == null && getTabuleiro().peca(p3) == null) {
+					mat[posicao.getLinha()][posicao.getColuna() - 2] = true;
+				}
 			}
 		}
-		
+
 		return mat;
 	}
 

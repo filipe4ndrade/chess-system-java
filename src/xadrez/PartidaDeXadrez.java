@@ -98,6 +98,22 @@ public class PartidaDeXadrez {
 			pecasCapturadas.add(pecaCapturada);
 
 		}
+		// Movimento Especial roque menor
+		if (p instanceof Rei && destino.getColuna() == origem.getColuna() + 2) {
+			Posicao origemT = new Posicao(origem.getLinha(), origem.getColuna() + 3);
+			Posicao destinoT = new Posicao(origem.getLinha(), origem.getColuna() + 1);
+			PecaDeXadrez torre = (PecaDeXadrez) tabuleiro.removerPeca(origemT);
+			tabuleiro.lugarDaPeca(torre, destinoT);
+			torre.adicionarContagemMovimento();
+		}
+		// Movimento Especial roque maior
+		if (p instanceof Rei && destino.getColuna() == origem.getColuna() - 2) {
+			Posicao origemT = new Posicao(origem.getLinha(), origem.getColuna() - 4);
+			Posicao destinoT = new Posicao(origem.getLinha(), origem.getColuna() - 1);
+			PecaDeXadrez torre = (PecaDeXadrez) tabuleiro.removerPeca(origemT);
+			tabuleiro.lugarDaPeca(torre, destinoT);
+			torre.adicionarContagemMovimento();
+		}
 		return pecaCapturada;
 	}
 
@@ -110,7 +126,26 @@ public class PartidaDeXadrez {
 			tabuleiro.lugarDaPeca(pecaCapturada, destino);
 			pecasCapturadas.remove(pecaCapturada);
 		}
+
+		// Movimento Especial roque menor
+		if (p instanceof Rei && destino.getColuna() == origem.getColuna() + 2) {
+			Posicao origemT = new Posicao(origem.getLinha(), origem.getColuna() + 3);
+			Posicao destinoT = new Posicao(origem.getLinha(), origem.getColuna() + 1);
+			PecaDeXadrez torre = (PecaDeXadrez) tabuleiro.removerPeca(destinoT);
+			tabuleiro.lugarDaPeca(torre, origemT);
+			torre.diminuirContagemMovimento();
+		}
+		// Movimento Especial roque maior
+		if (p instanceof Rei && destino.getColuna() == origem.getColuna() - 2) {
+			Posicao origemT = new Posicao(origem.getLinha(), origem.getColuna() - 4);
+			Posicao destinoT = new Posicao(origem.getLinha(), origem.getColuna() - 1);
+			PecaDeXadrez torre = (PecaDeXadrez) tabuleiro.removerPeca(destinoT);
+			tabuleiro.lugarDaPeca(torre, origemT);
+			torre.diminuirContagemMovimento();;
+		}
 	}
+
+	
 
 	private void validacaoPosicaoOrigem(Posicao posicao) {
 		if (!tabuleiro.existePeca(posicao)) {
@@ -201,10 +236,10 @@ public class PartidaDeXadrez {
 		novoLugarPeca('b', 1, new Cavalo(tabuleiro, Cores.WHITE));
 		novoLugarPeca('c', 1, new Bispo(tabuleiro, Cores.WHITE));
 		novoLugarPeca('d', 1, new Rainha(tabuleiro, Cores.WHITE));
-		novoLugarPeca('e', 1, new Rei(tabuleiro, Cores.WHITE));
+		novoLugarPeca('e', 1, new Rei(tabuleiro, Cores.WHITE, this));
 		novoLugarPeca('f', 1, new Bispo(tabuleiro, Cores.WHITE));
 		novoLugarPeca('g', 1, new Cavalo(tabuleiro, Cores.WHITE));
-		novoLugarPeca('h', 1, new Torre(tabuleiro, Cores.WHITE));		
+		novoLugarPeca('h', 1, new Torre(tabuleiro, Cores.WHITE));
 		novoLugarPeca('a', 2, new Peao(tabuleiro, Cores.WHITE));
 		novoLugarPeca('b', 2, new Peao(tabuleiro, Cores.WHITE));
 		novoLugarPeca('c', 2, new Peao(tabuleiro, Cores.WHITE));
@@ -218,7 +253,7 @@ public class PartidaDeXadrez {
 		novoLugarPeca('b', 8, new Cavalo(tabuleiro, Cores.BLACK));
 		novoLugarPeca('c', 8, new Bispo(tabuleiro, Cores.BLACK));
 		novoLugarPeca('d', 8, new Rainha(tabuleiro, Cores.BLACK));
-		novoLugarPeca('e', 8, new Rei(tabuleiro, Cores.BLACK));
+		novoLugarPeca('e', 8, new Rei(tabuleiro, Cores.BLACK, this));
 		novoLugarPeca('f', 8, new Bispo(tabuleiro, Cores.BLACK));
 		novoLugarPeca('g', 8, new Cavalo(tabuleiro, Cores.BLACK));
 		novoLugarPeca('h', 8, new Torre(tabuleiro, Cores.BLACK));
